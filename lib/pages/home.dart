@@ -1,3 +1,4 @@
+import 'package:asyncio/helpers/queries.dart';
 import 'package:asyncio/pages/communities.dart';
 import 'package:asyncio/pages/events.dart';
 import 'package:asyncio/pages/tutorials.dart';
@@ -5,6 +6,7 @@ import 'package:asyncio/pages/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_responsive_screen/flutter_responsive_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 class HomePage extends StatefulWidget {
   static const route = '/';
@@ -18,7 +20,6 @@ class _HomePageState extends State<HomePage> {
   Function hp;
   int _selectedIndex = 0;
   double selectedTextScale = 2.2;
-
 
   List<Map<String, String>> _buildMenuCardInfoList() {
     List<Map<String, String>> _menuCardInfoList = [];
@@ -313,6 +314,17 @@ class _HomePageState extends State<HomePage> {
               textScaleFactor: 2.5,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
+          ),
+          Query(
+            options: QueryOptions(document: Queries().news),
+            builder: (QueryResult result, {VoidCallback refetch}) {
+              if (result.loading) {
+                return Center(child: CircularProgressIndicator());
+              }
+              if (result.data == null) {
+                return Center(child: Text("No Data Found !"));
+              }
+            },
           ),
           _buildNewsItem()
         ],

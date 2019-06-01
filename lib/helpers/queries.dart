@@ -1,0 +1,3 @@
+class Queries {
+  String news = "{" + "}";
+}
