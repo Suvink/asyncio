@@ -1,3 +1,7 @@
+import 'package:asyncio/pages/communities.dart';
+import 'package:asyncio/pages/events.dart';
+import 'package:asyncio/pages/tutorials.dart';
+import 'package:asyncio/pages/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_responsive_screen/flutter_responsive_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -115,16 +119,16 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   switch (_selectedIndex) {
                     case 0:
-                      Navigator.pushNamed(context, '/events');
+                      Navigator.pushNamed(context, EventsPage.route);
                       break;
                     case 1:
-                      Navigator.pushNamed(context, '/tutorials');
+                      Navigator.pushNamed(context, TutorialsPage.route);
                       break;
                     case 2:
-                      Navigator.pushNamed(context, '/widgets');
+                      Navigator.pushNamed(context, WidgetsPage.route);
                       break;
                     case 3:
-                      Navigator.pushNamed(context, '/communities');
+                      Navigator.pushNamed(context, CommunitiesPage.route);
                       break;
                   }
                 },
@@ -223,7 +227,7 @@ class _HomePageState extends State<HomePage> {
             items: _buildBottomTitles(),
           ),
           Container(
-            child: Text("Events"),
+            child: Text("News"),
           )
         ],
       ),
