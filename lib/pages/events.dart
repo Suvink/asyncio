@@ -52,8 +52,9 @@ class _EventsPageState extends State<EventsPage> {
 
   Widget _page() {
     return Container(
-      child: ListView(
+      child: Column(
         children: <Widget>[
+          SizedBox(height: hp(2)),
           Text(
             "Upcoming Events",
             textScaleFactor: 2,
@@ -130,7 +131,7 @@ class _EventsPageState extends State<EventsPage> {
                         borderRadius: BorderRadius.circular(10.0),
                         child: Image.network(
                           'https://pbs.twimg.com/profile_images/760249570085314560/yCrkrbl3_400x400.jpg',
-                          height: hp(50),
+                          height: hp(20),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -138,7 +139,7 @@ class _EventsPageState extends State<EventsPage> {
                   )
                 ],
               ),
-              width: wp(90),
+              width: wp(100),
               height: hp(15),
             ),
           )
@@ -152,8 +153,12 @@ class _EventsPageState extends State<EventsPage> {
     wp = Screen(MediaQuery.of(context).size).wp;
     hp = Screen(MediaQuery.of(context).size).hp;
     return Scaffold(
-        body: ListView(
-      children: <Widget>[_topbar(), _page()],
-    ));
+      body: Column(
+        children: <Widget>[
+          _topbar(),
+          _page(),
+        ],
+      ),
+    );
   }
 }

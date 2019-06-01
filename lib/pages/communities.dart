@@ -13,53 +13,48 @@ class CommunitiesPage extends StatelessWidget {
 
     final topBar = new Stack(
       children: <Widget>[
-        Positioned(
-          child: Container(
-            height: hp(20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30.0),
-                bottomRight: Radius.circular(30.0),
-              ),
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Theme.of(context).accentColor,
-                  Theme.of(context).primaryColor,
-                ],
-              ),
+        Container(
+          height: hp(20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(30.0),
+              bottomRight: Radius.circular(30.0),
+            ),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Theme.of(context).accentColor,
+                Theme.of(context).primaryColor,
+              ],
             ),
           ),
         ),
         Positioned(
           top: 70,
-          left: 120,
+          left: 15,
           child: Text(
-            "Events",
-            textScaleFactor: 3,
+            "Communities",
+            textScaleFactor: 2,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
-        )
+        ),
       ],
     );
 
-    final block = Stack(
+    final block = Column(
       children: <Widget>[
-        Positioned(
-          top: 150,
-          left: 70.0,
+        Container(
           child: Text(
             "Reach our developer community",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
             textScaleFactor: 1.2,
           ),
         ),
-        Positioned(
-          top: 160.0,
+        Container(
           child: Card(
             child: Container(
               padding: EdgeInsets.all(5.0),
