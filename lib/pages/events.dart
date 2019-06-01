@@ -15,31 +15,28 @@ class _EventsPageState extends State<EventsPage> {
   Function hp;
 
   Widget _topbar() {
-    return Container(
-      height: hp(20),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(30.0),
-          bottomRight: Radius.circular(30.0),
-        ),
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Theme.of(context).accentColor,
-            Theme.of(context).primaryColor,
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _title() {
     return Stack(
       children: <Widget>[
+        Container(
+          height: hp(20),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(30.0),
+              bottomRight: Radius.circular(30.0),
+            ),
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Theme.of(context).accentColor,
+                Theme.of(context).primaryColor,
+              ],
+            ),
+          ),
+        ),
         Positioned(
           top: 70,
-          left: 120,
+          left: 20,
           child: Text(
             "Events",
             textScaleFactor: 3,
@@ -48,7 +45,7 @@ class _EventsPageState extends State<EventsPage> {
               color: Colors.white,
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -156,7 +153,7 @@ class _EventsPageState extends State<EventsPage> {
     hp = Screen(MediaQuery.of(context).size).hp;
     return Scaffold(
         body: ListView(
-      children: <Widget>[_topbar(), _title(), _page()],
+      children: <Widget>[_topbar(), _page()],
     ));
   }
 }

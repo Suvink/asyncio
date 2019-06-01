@@ -79,5 +79,9 @@ class CommunitiesPage extends StatelessWidget {
         )
       ],
     );
+
+    return SingleChildScrollView(
+      child: Column(children: <Widget>[topBar, block]),
+    );
   }
 }
