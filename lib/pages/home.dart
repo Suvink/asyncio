@@ -35,12 +35,12 @@ class _HomePageState extends State<HomePage> {
     _menuCardInfoList.add({
       "title": "TUTORIALS",
       "imageURL":
-          "https://www.sayonetech.com/media/uploads/zinnia/flutter_banner.jpg"
+          "https://cdn.discordapp.com/attachments/584245210779746304/584328515374022678/tablet-clipart-holding-1.png"
     });
     _menuCardInfoList.add({
       "title": "WIDGETS",
       "imageURL":
-          "https://www.sayonetech.com/media/uploads/zinnia/flutter_banner.jpg"
+          "https://cdn.discordapp.com/attachments/584245210779746304/584331152618422272/unknown.png"
     });
     _menuCardInfoList.add({
       "title": "COMMUNITIES",
