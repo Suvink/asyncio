@@ -171,6 +171,89 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _buildNewsItem() {
+    return Card(
+      elevation: 0.2,
+      child: Container(
+        padding: EdgeInsets.all(15.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              flex: 3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Colombo Flutter Community",
+                    textScaleFactor: 1.0,
+                  ),
+                  SizedBox(height: hp(0.5)),
+                  Text(
+                    "Hack 19 Hub will be in Sri Lanka",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      height: 0.8 //You can set your custom height here
+                      ,
+                    ),
+                    textScaleFactor: 1.5,
+                  ),
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.all(7.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          child: Text(
+                            "View More",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: wp(2)),
+                        Container(
+                          padding: EdgeInsets.all(7.0),
+                          child: Text(
+                            "14 hours ago",
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Image.network(
+                    'https://i.ytimg.com/vi/J5DQRPRBiFI/maxresdefault.jpg',
+                    height: hp(50),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+        width: wp(90),
+        height: hp(15),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     wp = Screen(MediaQuery.of(context).size).wp;
@@ -227,8 +310,15 @@ class _HomePageState extends State<HomePage> {
             items: _buildBottomTitles(),
           ),
           Container(
-            child: Text("News"),
-          )
+            padding: EdgeInsets.fromLTRB(20.0, 20.0, 0.0, 0.0),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "News",
+              textScaleFactor: 2.5,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          _buildNewsItem()
         ],
       ),
     );
