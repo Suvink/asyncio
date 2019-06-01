@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_responsive_screen/flutter_responsive_screen.dart';
 
-class CommunitiesPage extends StatelessWidget {
+class CommunitiesPage extends StatefulWidget {
   static const route = '/communities';
-  Function wp;
-  Function hp;
 
   @override
-  Widget build(BuildContext context) {
-    wp = Screen(MediaQuery.of(context).size).wp;
-    hp = Screen(MediaQuery.of(context).size).hp;
+  _CommunitiesPageState createState() => _CommunitiesPageState();
+}
 
-    final topBar = new Stack(
+class _CommunitiesPageState extends State<CommunitiesPage> {
+  Function wp;
+
+  Function hp;
+
+  Widget _topbar() {
+    return Stack(
       children: <Widget>[
         Container(
           height: hp(20),
@@ -32,10 +35,10 @@ class CommunitiesPage extends StatelessWidget {
         ),
         Positioned(
           top: 70,
-          left: 15,
+          left: 20,
           child: Text(
             "Communities",
-            textScaleFactor: 2,
+            textScaleFactor: 3,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -44,8 +47,10 @@ class CommunitiesPage extends StatelessWidget {
         ),
       ],
     );
+  }
 
-    final block = Column(
+  Widget block() {
+    return Column(
       children: <Widget>[
         Container(
           child: Text(
@@ -58,7 +63,7 @@ class CommunitiesPage extends StatelessWidget {
           child: Card(
             child: Container(
               padding: EdgeInsets.all(5.0),
-              child: ListView(
+              child: Column(
                 children: <Widget>[
                   Center(
                     child: Text(
@@ -74,9 +79,20 @@ class CommunitiesPage extends StatelessWidget {
         )
       ],
     );
+  }
 
-    return SingleChildScrollView(
-      child: Column(children: <Widget>[topBar, block]),
+  @override
+  Widget build(BuildContext context) {
+    wp = Screen(MediaQuery.of(context).size).wp;
+    hp = Screen(MediaQuery.of(context).size).hp;
+
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          _topbar(),
+          block(),
+        ],
+      ),
     );
   }
 }
