@@ -19,57 +19,25 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   double selectedTextScale = 2.2;
 
-  Widget _buildTopTitle() {
-    return Stack(
-      children: <Widget>[
-        Container(
-          height: hp(35),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30.0),
-              bottomRight: Radius.circular(30.0),
-            ),
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Theme.of(context).accentColor,
-                Theme.of(context).primaryColor,
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-          top: 115,
-          left: 20,
-          child: Text(
-            "Everything",
-            textScaleFactor: 3,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        Positioned(
-          top: 165,
-          left: 20,
-          child: Text(
-            "FLUTTER",
-            textScaleFactor: 3,
-            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-        )
-      ],
-    );
-  }
 
   List<Map<String, String>> _buildMenuCardInfoList() {
     List<Map<String, String>> _menuCardInfoList = [];
-    _menuCardInfoList.add({"title": "EVENTS", "imageURL": ""});
+    _menuCardInfoList.add({
+      "title": "EVENTS",
+      "imageURL":
+          "https://cdn.discordapp.com/attachments/584288125459759104/584301602769338399/events.jpg"
+    });
     _menuCardInfoList.add({"title": "TUTORIALS", "imageURL": ""});
-    _menuCardInfoList.add({"title": "WIDGETS", "imageURL": ""});
-    _menuCardInfoList.add({"title": "COMMUNITIES", "imageURL": ""});
+    _menuCardInfoList.add({
+      "title": "WIDGETS",
+      "imageURL":
+          "https://www.sayonetech.com/media/uploads/zinnia/flutter_banner.jpg"
+    });
+    _menuCardInfoList.add({
+      "title": "COMMUNITIES",
+      "imageURL":
+          "https://media.wired.com/photos/5932e854f682204f73697e7f/master/w_582,c_limit/hack.jpg"
+    });
     return _menuCardInfoList;
   }
 
@@ -97,18 +65,46 @@ class _HomePageState extends State<HomePage> {
         child: Stack(
           children: <Widget>[
             Container(
-              width: wp(65),
-            ),
+                width: wp(65),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30.0),
+                  child: Image.network(
+                    imageURL,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                )),
             Positioned(
               top: 20,
               left: 20,
+              child: Opacity(
+                opacity: 0.5,
+                child: Container(
+                  padding: EdgeInsets.all(5.0),
+                  color: Colors.black,
+                  alignment: Alignment.topCenter,
+                  child: Text(
+                    title,
+                    textScaleFactor: 2.2,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 22,
+              left: 20,
               child: Container(
-                alignment: Alignment.topCenter,
+                padding: EdgeInsets.all(5.0),
                 child: Text(
                   title,
                   textScaleFactor: 2.2,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -239,7 +235,7 @@ class _HomePageState extends State<HomePage> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Image.network(
-                    'https://i.ytimg.com/vi/J5DQRPRBiFI/maxresdefault.jpg',
+                    'https://pbs.twimg.com/profile_images/760249570085314560/yCrkrbl3_400x400.jpg',
                     height: hp(50),
                     fit: BoxFit.cover,
                   ),
