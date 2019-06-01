@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_responsive_screen/flutter_responsive_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   static const route = '/';
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
     _menuCardInfoList.add({
       "title": "COMMUNITIES",
       "imageURL":
-          "https://media.wired.com/photos/5932e854f682204f73697e7f/master/w_582,c_limit/hack.jpg"
+          "https://webcomicms.net/sites/default/files/clipart/162138/pictures-communities-162138-9135593.jpg"
     });
     return _menuCardInfoList;
   }
@@ -168,6 +169,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   Widget _buildNewsItem() {
     return Card(
       elevation: 0.2,
@@ -201,17 +210,21 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.all(7.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.0),
-                            color: Theme.of(context).primaryColor,
-                          ),
-                          child: Text(
-                            "View More",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                        GestureDetector(
+                          onTap: () => _launchURL(
+                              "https://stackoverflow.com/questions/43149055/how-do-i-open-a-web-browser-url-from-my-flutter-code"),
+                          child: Container(
+                            padding: EdgeInsets.all(7.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            child: Text(
+                              "View More",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
