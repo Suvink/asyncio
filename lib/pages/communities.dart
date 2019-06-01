@@ -61,21 +61,47 @@ class _CommunitiesPageState extends State<CommunitiesPage> {
         ),
         Container(
           child: Card(
-            child: Container(
-              padding: EdgeInsets.all(5.0),
               child: Column(
-                children: <Widget>[
-                  Center(
-                    child: Text(
-                      "Colombo Flutter Community",
-                      style: TextStyle(color: Colors.black),
-                      textScaleFactor: 1.4,
-                    ),
-                  ),
-                ],
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.all(15.0),
+                child: Image.network(
+                  'https://cdn-images-1.medium.com/max/1200/1*ilC2Aqp5sZd1wi0CopD1Hw.png',
+                  width: wp(25),
+                ),
               ),
-            ),
-          ),
+              Container(
+                padding: EdgeInsets.all(5.0),
+                child: Column(
+                  children: <Widget>[
+                    Center(
+                      child: Text(
+                        "Colombo Flutter Community",
+                        style: TextStyle(color: Colors.black),
+                        textScaleFactor: 2.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "About Us",
+                  textScaleFactor: 1.5,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 10.0),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Colombo Flutter Community is a determined to promote the use of Flutter throughout Sri Lanka as it is the future for mobile application development.",
+                  textScaleFactor: 1.3,
+                ),
+              )
+            ],
+          )),
         )
       ],
     );
