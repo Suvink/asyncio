@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:asyncio/helpers/queries.dart';
 import 'package:asyncio/pages/communities.dart';
 import 'package:asyncio/pages/events.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_responsive_screen/flutter_responsive_screen.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:asyncio/models/data_class.dart';
 
 class HomePage extends StatefulWidget {
   static const route = '/';
@@ -29,7 +32,11 @@ class _HomePageState extends State<HomePage> {
       "imageURL":
           "https://cdn.discordapp.com/attachments/584288125459759104/584301602769338399/events.jpg"
     });
-    _menuCardInfoList.add({"title": "TUTORIALS", "imageURL": ""});
+    _menuCardInfoList.add({
+      "title": "TUTORIALS",
+      "imageURL":
+          "https://www.sayonetech.com/media/uploads/zinnia/flutter_banner.jpg"
+    });
     _menuCardInfoList.add({
       "title": "WIDGETS",
       "imageURL":
@@ -177,7 +184,10 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Widget _buildNewsItem() {
+//       widgets.add(_buildNewsItem(news.source, news.title, news.link, news.image))
+
+  Widget _buildNewsItem(
+      String source, String title, String link, String image) {
     return Card(
       elevation: 0.2,
       child: Container(
@@ -193,12 +203,12 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Colombo Flutter Community",
+                    source,
                     textScaleFactor: 1.0,
                   ),
                   SizedBox(height: hp(0.5)),
                   Text(
-                    "Hack 19 Hub will be in Sri Lanka",
+                    title,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       height: 0.8 //You can set your custom height here
@@ -211,8 +221,7 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         GestureDetector(
-                          onTap: () => _launchURL(
-                              "https://stackoverflow.com/questions/43149055/how-do-i-open-a-web-browser-url-from-my-flutter-code"),
+                          onTap: () => _launchURL(link),
                           child: Container(
                             padding: EdgeInsets.all(7.0),
                             decoration: BoxDecoration(
@@ -249,8 +258,9 @@ class _HomePageState extends State<HomePage> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Image.network(
-                    'https://pbs.twimg.com/profile_images/760249570085314560/yCrkrbl3_400x400.jpg',
+                    "https://iconicto.sgp1.cdn.digitaloceanspaces.com/Hack19/media/$image",
                     height: hp(50),
+                    width: wp(50),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -269,79 +279,106 @@ class _HomePageState extends State<HomePage> {
     wp = Screen(MediaQuery.of(context).size).wp;
     hp = Screen(MediaQuery.of(context).size).hp;
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Container(height: 30),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  width: wp(100),
-                  height: hp(10),
-                ),
-                Positioned(
-                  top: 10,
-                  left: 15,
-                  child: Text(
-                    "Timeline",
-                    textScaleFactor: 3.8,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).primaryColor),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            Container(height: 30),
+            Container(
+              padding: EdgeInsets.all(10.0),
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    width: wp(100),
+                    height: hp(10),
                   ),
-                ),
-                Positioned(
-                  top: 60,
-                  left: 35,
-                  child: Text(
-                    "See stuff around you",
-                    textScaleFactor: 1.0,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                        fontStyle: FontStyle.italic),
+                  Positioned(
+                    top: 10,
+                    left: 15,
+                    child: Text(
+                      "Timeline",
+                      textScaleFactor: 3.8,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor),
+                    ),
                   ),
-                ),
-              ],
+                  Positioned(
+                    top: 60,
+                    left: 35,
+                    child: Text(
+                      "See stuff around you",
+                      textScaleFactor: 1.0,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey,
+                          fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          CarouselSlider(
-            height: hp(45),
-            enlargeCenterPage: true,
-            onPageChanged: (int pageNumber) {
-              setState(() {
-                _selectedIndex = pageNumber;
-              });
-            },
-            viewportFraction: 0.7,
-            initialPage: 0,
-            enableInfiniteScroll: true,
-            items: _buildBottomTitles(),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(20.0, 20.0, 0.0, 0.0),
-            alignment: Alignment.centerLeft,
-            child: Text(
-              "News",
-              textScaleFactor: 2.5,
-              style: TextStyle(fontWeight: FontWeight.bold),
+            CarouselSlider(
+              height: hp(45),
+              enlargeCenterPage: true,
+              onPageChanged: (int pageNumber) {
+                setState(() {
+                  _selectedIndex = pageNumber;
+                });
+              },
+              viewportFraction: 0.7,
+              initialPage: 0,
+              enableInfiniteScroll: true,
+              items: _buildBottomTitles(),
             ),
-          ),
-          Query(
-            options: QueryOptions(document: Queries().news),
-            builder: (QueryResult result, {VoidCallback refetch}) {
-              if (result.loading) {
-                return Center(child: CircularProgressIndicator());
-              }
-              if (result.data == null) {
-                return Center(child: Text("No Data Found !"));
-              }
-            },
-          ),
-          _buildNewsItem()
-        ],
+            Container(
+              padding: EdgeInsets.fromLTRB(20.0, 20.0, 0.0, 0.0),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "News",
+                textScaleFactor: 2.5,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            Query(
+              options: QueryOptions(document: Queries().news),
+              builder: (QueryResult result, {VoidCallback refetch}) {
+                if (result.loading) {
+                  return Container(
+                      padding: EdgeInsets.all(50.0),
+                      child: Center(child: CircularProgressIndicator()));
+                }
+                if (result.data == null) {
+                  return Center(child: Text("No Data Found !"));
+                }
+                print(result.data);
+                // print("HH ${result.data['news'][0]['title']}");
+                Data apiData = Data.fromMap(result.data);
+                // print(apiData.getData());
+                print(apiData.news[0].title);
+                // Data apiData = Data.fromMap(result.data);
+                // GraphQLResponse data = GraphQLResponse.fromMap(result.data);
+                return _buildNewsColumn(apiData.news);
+              },
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  Widget _buildNewsColumn(List<News> newsList) {
+    List<Widget> widgets = [];
+    newsList.forEach((News news) {
+      print(news.image);
+      widgets.add(
+          _buildNewsItem(news.source.name, news.title, news.link, news.image));
+    });
+    return Column(
+      children: widgets,
+    );
+    // newsList.forEach(News news) {
+    //   widgets.add(_buildNewsItem(
+    //       news['source']['name'], news['title'], news['link'], news['image']));
+    // });
   }
 }
